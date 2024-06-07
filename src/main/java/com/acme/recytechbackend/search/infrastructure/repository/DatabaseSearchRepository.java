@@ -1,6 +1,6 @@
 package com.acme.recytechbackend.search.infrastructure.repository;
 
-import com.acme.recytechbackend.search.domain.model.Device;
+import com.acme.recytechbackend.devices.domain.model.aggregates.Device;
 import com.acme.recytechbackend.search.domain.model.SearchQuery;
 import com.acme.recytechbackend.search.domain.model.repository.SearchRepository;
 import org.springframework.stereotype.Repository;

@@ -1,15 +1,20 @@
-package com.acme.recytechbackend.search.domain.model;
+package com.acme.recytechbackend.devices.domain.model.aggregates;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "devices")
 public class Device {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String description;
     private String type;
     private String category;
