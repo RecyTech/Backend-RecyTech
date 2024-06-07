@@ -48,7 +48,6 @@ public class UserCommandServiceImpl implements UserCommandService {
                 "No description provided.",
                 "No country provided.",
                 "No phone provided.",
-                0,
                 "https://cdn-icons-png.flaticon.com/512/3237/3237472.png"
         );
         customerRepository.save(customer);

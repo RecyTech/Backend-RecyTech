@@ -1,5 +1,10 @@
 package com.acme.recytechbackend.auth.domain.model.aggregates;
 
+import com.acme.recytechbackend.auth.domain.model.commands.SignUpCustomerCommand;
+import com.acme.recytechbackend.auth.domain.model.valueobjects.Country;
+import com.acme.recytechbackend.auth.domain.model.valueobjects.Description;
+import com.acme.recytechbackend.auth.domain.model.valueobjects.PersonName;
+import com.acme.recytechbackend.auth.domain.model.valueobjects.PhoneNumber;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -11,15 +16,18 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String firstName;
+    @Embedded
+    private PersonName name;
 
-    @NotBlank
-    private String lastName;
+    @Embedded
+    private Description description;
 
-    private String description = "No description provided.";
-    private String country = "No country provided.";
-    private String phone = "999 999 999";
+    @Embedded
+    private Country country;
+
+    @Embedded
+    private PhoneNumber phoneNumber;
+
     private int postedproducts = 0;
     private String profileImgUrl = "https://cdn-icons-png.flaticon.com/512/3237/3237472.png";
 
@@ -33,15 +41,13 @@ public class Customer {
                     String description,
                     String country,
                     String phone,
-                    int postedproducts,
                     String profileImgUrl) {
         this.user = user;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-        this.country = country;
-        this.phone = phone;
-        this.postedproducts = postedproducts;
+        this.name = new PersonName(firstName, lastName);
+        this.description = new Description(description);
+        this.country = new Country(country);
+        this.phoneNumber = new PhoneNumber(phone);
+        this.postedproducts = 0;
         this.profileImgUrl = profileImgUrl;
     }
 
