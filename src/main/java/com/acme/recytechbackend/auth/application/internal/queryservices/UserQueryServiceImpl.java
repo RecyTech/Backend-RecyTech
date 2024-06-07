@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserQueryServiceImpl implements UserQueryService {
+public class UserQueryServiceImpl implements UserQueryService{
     private final UserRepository userRepository;
 
     public UserQueryServiceImpl(UserRepository userRepository) { this.userRepository = userRepository; }

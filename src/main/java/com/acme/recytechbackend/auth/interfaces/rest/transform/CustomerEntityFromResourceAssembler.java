@@ -1,6 +1,6 @@
 package com.acme.recytechbackend.auth.interfaces.rest.transform;
 
-import com.acme.recytechbackend.auth.domain.model.aggregates.Customer;
+import com.acme.recytechbackend.auth.domain.model.aggregates.*;
 import com.acme.recytechbackend.auth.domain.model.aggregates.User;
 import com.acme.recytechbackend.auth.domain.model.commands.SignUpCustomerCommand;
 
