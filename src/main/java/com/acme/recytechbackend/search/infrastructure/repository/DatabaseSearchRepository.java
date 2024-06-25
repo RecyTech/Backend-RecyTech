@@ -3,11 +3,11 @@ package com.acme.recytechbackend.search.infrastructure.repository;
 import com.acme.recytechbackend.devices.domain.model.aggregates.Device;
 import com.acme.recytechbackend.search.domain.model.SearchQuery;
 import com.acme.recytechbackend.search.domain.model.repository.SearchRepository;
-import org.springframework.stereotype.Repository;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -18,7 +18,7 @@ public class DatabaseSearchRepository implements SearchRepository {
 
     @Override
     public List<Device> searchDevices(SearchQuery query) {
-        String jpql = "SELECT d FROM Device d WHERE d.name LIKE :keyword AND d.category = :category";
+        String jpql = "SELECT d FROM Device d WHERE d.name LIKE :keyword AND d.categories = :category";
         TypedQuery<Device> typedQuery = entityManager.createQuery(jpql, Device.class);
         typedQuery.setParameter("keyword", "%" + query.keyword() + "%");
         typedQuery.setParameter("category", query.category());

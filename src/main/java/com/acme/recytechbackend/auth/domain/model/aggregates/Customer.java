@@ -3,6 +3,7 @@ package com.acme.recytechbackend.auth.domain.model.aggregates;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -20,6 +21,7 @@ public class Customer {
     private String description = "No description provided.";
     private String country = "No country provided.";
     private String phone = "999 999 999";
+    @Setter
     private int postedproducts = 0;
     private String profileImgUrl = "https://cdn-icons-png.flaticon.com/512/3237/3237472.png";
 

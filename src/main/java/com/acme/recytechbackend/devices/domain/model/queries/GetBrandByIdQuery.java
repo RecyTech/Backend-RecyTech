@@ -1,4 +1,6 @@
 package com.acme.recytechbackend.devices.domain.model.queries;
 
-public class GetAllDeviceByBrandQuery {
+import com.acme.recytechbackend.devices.domain.model.aggregates.Brand;
+
+public record GetBrandByIdQuery(Integer id) {
 }

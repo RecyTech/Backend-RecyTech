@@ -1,4 +1,4 @@
 package com.acme.recytechbackend.devices.domain.model.queries;
 
-public class GetAllDeviceByIdQuery {
+public record GetDeviceByIdQuery(Long id) {
 }

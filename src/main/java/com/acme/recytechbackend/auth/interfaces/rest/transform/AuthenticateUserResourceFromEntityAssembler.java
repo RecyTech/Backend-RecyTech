@@ -5,6 +5,6 @@ import com.acme.recytechbackend.auth.interfaces.rest.resources.AuthenticateUserR
 
 public class AuthenticateUserResourceFromEntityAssembler {
     public static AuthenticateUserResource toResourceFromEntity(User user) {
-        return new AuthenticateUserResource(user.getUserId(), user.getEmail());
+        return new AuthenticateUserResource(user.getUserId(), user.getUserType());
     }
 }

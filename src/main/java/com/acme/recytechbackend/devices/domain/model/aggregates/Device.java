@@ -1,7 +1,14 @@
 package com.acme.recytechbackend.devices.domain.model.aggregates;
 
+import com.acme.recytechbackend.auth.domain.model.aggregates.Customer;
+import com.acme.recytechbackend.devices.domain.model.commands.CreateDeviceCommand;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -9,63 +16,56 @@ import lombok.Getter;
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private String description;
-    private String type;
-    private String category;
+
+    @Column(nullable = false)
+    private Double precio;
+
+    @Column(nullable = false)
+    private String imagenURL;
+
+    @Setter
+    private String state;
+
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "device_categories",
+            joinColumns = @JoinColumn(name = "device_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    @JsonManagedReference
+    private List<Category> categories;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "device_brands",
+            joinColumns = @JoinColumn(name = "device_id"),
+            inverseJoinColumns = @JoinColumn(name = "brand_id")
+    )
+    @JsonManagedReference
+    private List<Brand> brands;
 
     public Device() {}
 
-    public Device(String id, String name, String description, String type, String category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.type = type;
-        this.category = category;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public Device(CreateDeviceCommand command) {
+        this.name = command.name();
+        this.description = command.description();
+        this.precio = 0.0;
+        this.imagenURL = command.ImagenURL();
+        this.state = "Disponible";
+        this.customer = null;
+        this.categories = new ArrayList<>();
+        this.brands = new ArrayList<>();
     }
 }

@@ -1,4 +1,4 @@
 package com.acme.recytechbackend.devices.domain.model.queries;
 
-public class GetAllDevicesQuery {
+public record GetAllDevicesQuery() {
 }
